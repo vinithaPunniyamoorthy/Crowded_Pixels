@@ -1,0 +1,33 @@
+import cv2
+import numpy as np
+
+# Load the full image
+full_image = cv2.imread('photo_20.jpg')
+
+
+new_width = 345.6
+new_height = 460.8
+
+# Resize the image
+resized_image = cv2.resize(full_image, (int(new_width), int(new_height)))
+
+# Check if the image was loaded successfully
+if resized_image is None:
+    print("Error: Unable to load the image. Please check the file path and format.")
+else:
+    # Calculate the height for the cropped region (half of original height)
+    crop_height = resized_image.shape[0] // 2
+    
+    # Define the coordinates for the cropped region (from top to bottom)
+    x1 =0
+    x2 = resized_image.shape[0]
+    y1 = 10
+    y2 = crop_height
+   
+    # Perform the crop
+    cropped_image = resized_image[y1:y2, x1:x2]
+    cv2.imwrite('cropped_image_20.jpg', cropped_image)
+    cv2.imshow('Cropped Image', cropped_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    
